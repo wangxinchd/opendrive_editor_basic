@@ -1,8 +1,8 @@
 #ifndef MAP_BASE_INTERSECTION_HPP
 #define MAP_BASE_INTERSECTION_HPP
 
-#include "road.hpp"
 #include "lane.hpp"
+#include "road.hpp"
 
 #include <cstdint>
 #include <memory>
@@ -15,53 +15,51 @@ namespace map_base {
 // exit and exist inside the intersection. The polygon defines the intersection boundary.
 class Intersection {
 public:
-    using Point = Lane::Point;
+  using Point = Lane::Point;
 
-    Intersection() = default;
-    Intersection(std::int64_t id, std::string name = "") : id_(id), name_(std::move(name)) {}
+  Intersection() = default;
+  Intersection(std::int64_t id, std::string name = "") : id_(id), name_(std::move(name)) {}
 
-    std::int64_t id() const { return id_; }
-    const std::string& name() const { return name_; }
-    void setName(const std::string& name) { name_ = name; }
+  std::int64_t id() const { return id_; }
+  const std::string &name() const { return name_; }
+  void setName(const std::string &name) { name_ = name; }
 
-    const std::vector<std::shared_ptr<Road>>& incoming() const { return incoming_; }
-    const std::vector<std::shared_ptr<Road>>& outgoing() const { return outgoing_; }
-    const std::vector<std::shared_ptr<Road>>& internal() const { return internal_; }
+  const std::vector<std::shared_ptr<Road>> &incoming() const { return incoming_; }
+  const std::vector<std::shared_ptr<Road>> &outgoing() const { return outgoing_; }
+  const std::vector<std::shared_ptr<Road>> &internal() const { return internal_; }
 
-    const std::vector<std::shared_ptr<Lane>>& incoming_lanes() const { return incoming_lanes_; }
-    const std::vector<std::shared_ptr<Lane>>& outgoing_lanes() const { return outgoing_lanes_; }
-    const std::vector<std::shared_ptr<Lane>>& internal_lanes() const { return internal_lanes_; }
+  const std::vector<std::shared_ptr<Lane>> &incoming_lanes() const { return incoming_lanes_; }
+  const std::vector<std::shared_ptr<Lane>> &outgoing_lanes() const { return outgoing_lanes_; }
+  const std::vector<std::shared_ptr<Lane>> &internal_lanes() const { return internal_lanes_; }
 
-    void addIncoming(const std::shared_ptr<Road>& road, const std::shared_ptr<Lane>& lane) {
-        incoming_.push_back(road);
-        incoming_lanes_.push_back(lane);
-    }
-    void addOutgoing(const std::shared_ptr<Road>& road, const std::shared_ptr<Lane>& lane) {
-        outgoing_.push_back(road);
-        outgoing_lanes_.push_back(lane);
-    }
-    void addInternal(const std::shared_ptr<Road>& road, const std::shared_ptr<Lane>& lane) {
-        internal_.push_back(road);
-        internal_lanes_.push_back(lane);
-    }
+  void addIncoming(const std::shared_ptr<Road> &road, const std::shared_ptr<Lane> &lane) {
+    incoming_.push_back(road);
+    incoming_lanes_.push_back(lane);
+  }
+  void addOutgoing(const std::shared_ptr<Road> &road, const std::shared_ptr<Lane> &lane) {
+    outgoing_.push_back(road);
+    outgoing_lanes_.push_back(lane);
+  }
+  void addInternal(const std::shared_ptr<Road> &road, const std::shared_ptr<Lane> &lane) {
+    internal_.push_back(road);
+    internal_lanes_.push_back(lane);
+  }
 
-    // Polygon defining the intersection boundary (sequence of (x,y) points).
-    const std::vector<Point>& polygon() const { return polygon_; }
-    void setPolygon(const std::vector<Point>& poly) { polygon_ = poly; }
-    void addPolygonPoint(const Point& p) { polygon_.push_back(p); }
-    void clearPolygon() { polygon_.clear(); }
+  // Polygon defining the intersection boundary (sequence of (x,y) points).
+  const std::vector<Point> &polygon() const { return polygon_; }
+  void setPolygon(const std::vector<Point> &poly) { polygon_ = poly; }
+  void addPolygonPoint(const Point &p) { polygon_.push_back(p); }
+  void clearPolygon() { polygon_.clear(); }
 
 private:
-    std::int64_t id_{0};
-    std::string name_;
-    std::vector<Roadstd::shared_ptr<Lane>> incoming_;
-    std::vector<Roadstd::shared_ptr<Lane>> outgoing_;
-    std::vector<Roadstd::shared_ptr<Lane>> internal_;
-    std::vector<Point> polygon_;
+  std::int64_t id_{0};
+  std::string name_;
+  std::vector<Roadstd::shared_ptr<Lane>> incoming_;
+  std::vector<Roadstd::shared_ptr<Lane>> outgoing_;
+  std::vector<Roadstd::shared_ptr<Lane>> internal_;
+  std::vector<Point> polygon_;
 };
 
 } // namespace map_base
 
 #endif // MAP_BASE_INTERSECTION_HPP
-
-
