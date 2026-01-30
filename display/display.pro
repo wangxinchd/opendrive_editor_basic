@@ -9,14 +9,19 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    form_edit/edit_road/form_edit_road.cpp \
     main.cpp \
     display.cpp
 
 HEADERS += \
-    display.h
+    display.h \
+    form_edit/edit_road/form_edit_road.h \
+    form_edit_road.h
 
 FORMS += \
-    display.ui
+    display.ui \
+    form_edit/edit_road/form_edit_road.ui \
+    form_edit_road.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

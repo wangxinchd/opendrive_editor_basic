@@ -15,6 +15,9 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 add_executable(${PROJECT_NAME} display.cpp
                                main.cpp
                                display.ui
+
+                               form_edit/edit_road/form_edit_road.ui
+                               form_edit/edit_road/form_edit_road.cpp
                                )
 
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
