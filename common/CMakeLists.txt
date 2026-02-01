@@ -4,7 +4,8 @@ project(common)
 
 set(SOURCES
     geometry.cpp
-    polynomial.cpp)
+    polynomial.cpp
+    )
 
 add_library(${PROJECT_NAME}_lib STATIC ${SOURCES})
 
