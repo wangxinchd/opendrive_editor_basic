@@ -5,6 +5,21 @@
 
 namespace map_sdk {
 
+// 静态成员初始化
+MapParserFactory *MapParserFactory::instance_ = nullptr;
+std::mutex MapParserFactory::mutex_;
+
+MapParserFactory &MapParserFactory::GetInstance() {
+  // 双重检查锁定（Double-Checked Locking）
+  if (instance_ == nullptr) {
+    std::lock_guard<std::mutex> lock(mutex_);
+    if (instance_ == nullptr) {
+      instance_ = new MapParserFactory();
+    }
+  }
+  return *instance_;
+}
+
 std::unique_ptr<MapParserBase> MapParserFactory::CreateMapParser(MapType type) {
   switch (type) {
   case MAP_TYPE_OPENDRIVE:

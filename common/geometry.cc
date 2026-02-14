@@ -1,5 +1,5 @@
-#include "geometry.hpp"
-#include "point.hpp"
+#include "geometry.h"
+#include "point.h"
 
 namespace common::geometry {
 

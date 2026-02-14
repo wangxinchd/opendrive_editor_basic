@@ -1,7 +1,7 @@
 #ifndef MAP_PARSER_BASE_H
 #define MAP_PARSER_BASE_H
 
-#include "map_sdk/map_base/map.hpp"
+#include "map_sdk/map_base/map.h"
 #include <string>
 
 namespace map_sdk {

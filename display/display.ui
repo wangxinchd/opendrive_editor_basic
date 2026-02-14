@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>985</width>
-    <height>674</height>
+    <width>1229</width>
+    <height>886</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,15 +19,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>985</width>
-     <height>28</height>
+     <width>1229</width>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menufile">
     <property name="title">
      <string>file</string>
     </property>
-    <addaction name="actionopen_drive_map"/>
+    <addaction name="actionopendrive_map"/>
+    <addaction name="actionreload_file"/>
    </widget>
    <widget class="QMenu" name="menuedit">
     <property name="title">
@@ -39,15 +40,21 @@
     <property name="title">
      <string>view</string>
     </property>
+    <addaction name="actiondisplay_config"/>
    </widget>
    <addaction name="menufile"/>
    <addaction name="menuedit"/>
    <addaction name="menuview"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionopen_drive_map">
+  <action name="actionopendrive_map">
    <property name="text">
     <string>open drive map</string>
+   </property>
+  </action>
+  <action name="actionreload_file">
+   <property name="text">
+    <string>重新加载文件</string>
    </property>
   </action>
   <action name="action">
@@ -58,6 +65,11 @@
   <action name="actionedit_road">
    <property name="text">
     <string>edit road</string>
+   </property>
+  </action>
+  <action name="actiondisplay_config">
+   <property name="text">
+    <string>显示配置</string>
    </property>
   </action>
  </widget>

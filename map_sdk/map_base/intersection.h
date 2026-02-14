@@ -1,8 +1,8 @@
 #ifndef MAP_BASE_INTERSECTION_HPP
 #define MAP_BASE_INTERSECTION_HPP
 
-#include "lane.hpp"
-#include "road.hpp"
+#include "lane.h"
+#include "road.h"
 
 #include <cstdint>
 #include <memory>
@@ -72,7 +72,7 @@ private:
   std::int64_t id_{0};
   std::string name_;
   std::vector<std::shared_ptr<Road>> incoming_roads_;
-  std::vector<std::shared_ptr<Road>> outgoing_roads_ ;
+  std::vector<std::shared_ptr<Road>> outgoing_roads_;
   std::vector<std::shared_ptr<Road>> internal_roads_;
   std::vector<Point2d> polygon_;
   std::vector<std::shared_ptr<Lane>> incoming_lanes_;

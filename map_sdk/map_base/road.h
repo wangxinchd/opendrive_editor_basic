@@ -1,10 +1,10 @@
 #ifndef MAP_BASE_ROAD_HPP
 #define MAP_BASE_ROAD_HPP
 
-#include "lane.hpp"
+#include "lane.h"
 
-#include "common/point.hpp"
-#include "road_boundary.hpp"
+#include "common/point.h"
+#include "road_boundary.h"
 #include <algorithm>
 #include <cstdint>
 #include <string>

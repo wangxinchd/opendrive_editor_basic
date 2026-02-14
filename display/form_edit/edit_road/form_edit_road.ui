@@ -6,14 +6,587 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>442</height>
+    <width>480</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>道路参考线编辑 (ParamPoly3)</string>
   </property>
+
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>10</number>
+   </property>
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="rightMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>10</number>
+   </property>
+
+   <!-- 道路选择区域 -->
+   <item>
+    <widget class="QGroupBox" name="groupBox_road">
+     <property name="title">
+      <string>道路选择</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_road">
+      <item>
+       <widget class="QLabel" name="label_road">
+        <property name="text">
+         <string>道路:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="comboBox_road">
+        <property name="minimumSize">
+         <size>
+          <width>300</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 分隔线 -->
+   <item>
+    <widget class="QFrame" name="line_separator1">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- ParamPoly3 系数显示区域 (多段) -->
+   <item>
+    <widget class="QGroupBox" name="groupBox_coeff">
+     <property name="title">
+      <string>当前 ParamPoly3 系数 (共 n-1 段)</string>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>120</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_coeff">
+      
+      <!-- 使用表格显示多段系数 -->
+      <item>
+       <widget class="QTableWidget" name="tableWidget_segments">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <column>
+         <property name="text">
+          <string>段</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>p范围</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>aU</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>bU</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>cU</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>dU</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>aV</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>bV</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>cV</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>dV</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      
+      <!-- OpenDRIVE 格式预览 -->
+      <item>
+       <widget class="QGroupBox" name="groupBox_opendrive">
+        <property name="title">
+         <string>OpenDRIVE 格式预览</string>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>80</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_opendrive">
+         <item>
+          <widget class="QTextEdit" name="textEdit_opendrive">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="lineWrapMode">
+            <enum>QTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 分隔线 -->
+   <item>
+    <widget class="QFrame" name="line_separator2">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- 控制点管理区域 -->
+   <item>
+    <widget class="QGroupBox" name="groupBox_controlPoints">
+     <property name="title">
+      <string>控制点管理</string>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>280</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_controlPoints">
+      
+      <!-- 控制点操作按钮 -->
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_pointButtons">
+        <item>
+         <widget class="QPushButton" name="pushButton_addPoint">
+          <property name="text">
+           <string>+ 添加</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_deletePoint">
+          <property name="text">
+           <string>- 删除</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_moveUp">
+          <property name="text">
+           <string>↑ 上移</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_moveDown">
+          <property name="text">
+           <string>↓ 下移</string>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>70</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_pointButtons">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      
+      <!-- 控制点列表标题 -->
+      <item>
+       <widget class="QLabel" name="label_controlPoints">
+        <property name="text">
+         <string>控制点列表:</string>
+        </property>
+       </widget>
+      </item>
+      
+      <!-- 控制点表格 -->
+      <item>
+       <widget class="QTableWidget" name="tableWidget_controlPoints">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <column>
+         <property name="text">
+          <string>#</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>X</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Y</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>yaw(rad)</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 分隔线 -->
+   <item>
+    <widget class="QFrame" name="line_separator3">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- 拟合选项区域 -->
+   <item>
+    <widget class="QGroupBox" name="groupBox_fitOptions">
+     <property name="title">
+      <string>拟合选项</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_fitOptions">
+      <item>
+       <widget class="QRadioButton" name="radioButton_hermite">
+        <property name="text">
+         <string>分段三次 Hermite 插值 (推荐)</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButton_leastSquares">
+        <property name="text">
+         <string>最小二乘法</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_samplePoints">
+        <item>
+         <widget class="QLabel" name="label_samplePoints">
+          <property name="text">
+           <string>采样点数:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="spinBox_samplePoints">
+          <property name="minimum">
+           <number>10</number>
+          </property>
+          <property name="maximum">
+           <number>500</number>
+          </property>
+          <property name="value">
+           <number>100</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 分隔线 -->
+   <item>
+    <widget class="QFrame" name="line_separator4">
+     <property name="frameShape">
+      <enum>QFrame::HLine</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
+     </property>
+    </widget>
+   </item>
+
+   <!-- 文件信息 -->
+   <item>
+    <widget class="QGroupBox" name="groupBox_file">
+     <property name="title">
+      <string>文件信息</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_file">
+      <item>
+       <widget class="QLabel" name="label_filePath">
+        <property name="text">
+         <string>当前文件:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineEdit_filePath">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string>未加载文件</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+
+   <!-- 操作按钮 -->
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_buttons">
+     <item>
+      <spacer name="horizontalSpacer_buttons_left">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_fit">
+       <property name="text">
+        <string>拟合曲线</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_save">
+       <property name="text">
+        <string>确定</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_cancel">
+       <property name="text">
+        <string>取消</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_reset">
+       <property name="text">
+        <string>重置</string>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   
+  </layout>
+
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <!-- 道路选择变化 -->
+  <connection>
+   <sender>comboBox_road</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onRoadSelected(int)</slot>
+  </connection>
+  
+  <!-- 添加控制点 -->
+  <connection>
+   <sender>pushButton_addPoint</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onAddPointClicked()</slot>
+  </connection>
+  
+  <!-- 删除控制点 -->
+  <connection>
+   <sender>pushButton_deletePoint</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onDeletePointClicked()</slot>
+  </connection>
+  
+  <!-- 上移控制点 -->
+  <connection>
+   <sender>pushButton_moveUp</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onMoveUpClicked()</slot>
+  </connection>
+  
+  <!-- 下移控制点 -->
+  <connection>
+   <sender>pushButton_moveDown</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onMoveDownClicked()</slot>
+  </connection>
+  
+  <!-- 控制点表格点击 -->
+  <connection>
+   <sender>tableWidget_controlPoints</sender>
+   <signal>cellClicked(int, int)</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onControlPointClicked(int, int)</slot>
+  </connection>
+  
+  <!-- 拟合曲线按钮 -->
+  <connection>
+   <sender>pushButton_fit</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onFitClicked()</slot>
+  </connection>
+  
+  <!-- 保存按钮 -->
+  <connection>
+   <sender>pushButton_save</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onSaveClicked()</slot>
+  </connection>
+  
+  <!-- 取消按钮 -->
+  <connection>
+   <sender>pushButton_cancel</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onCancelClicked()</slot>
+  </connection>
+  
+  <!-- 重置按钮 -->
+  <connection>
+   <sender>pushButton_reset</sender>
+   <signal>clicked()</signal>
+   <receiver>FormEditRoad</receiver>
+   <slot>onResetClicked()</slot>
+  </connection>
+  
+ </connections>
 </ui>
