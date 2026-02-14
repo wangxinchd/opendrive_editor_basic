@@ -7,16 +7,15 @@ namespace Ui {
 class FormEditRoad;
 }
 
-class FormEditRoad : public QWidget
-{
-    Q_OBJECT
+class FormEditRoad : public QWidget {
+  Q_OBJECT
 
 public:
-    explicit FormEditRoad(QWidget *parent = nullptr);
-    ~FormEditRoad();
+  explicit FormEditRoad(QWidget *parent = nullptr);
+  ~FormEditRoad();
 
 private:
-    Ui::FormEditRoad *ui;
+  Ui::FormEditRoad *ui;
 };
 
 #endif // FORM_EDIT_ROAD_H

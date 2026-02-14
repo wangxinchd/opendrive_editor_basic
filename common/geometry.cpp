@@ -1,4 +1,5 @@
 #include "geometry.hpp"
+#include "point.hpp"
 
 namespace common::geometry {
 
@@ -23,10 +24,10 @@ double NormalizeAngle(double angle, double lower, double upper) {
 }
 
 /* =========================
- * Point transform
+ * Point2d transform
  * ========================= */
 
-Point WorldToLocal(const Point &world, const Pose &ref) {
+Point2d WorldToLocal(const Point2d &world, const Pose2d &ref) {
   const double cos_yaw = std::cos(ref.yaw);
   const double sin_yaw = std::sin(ref.yaw);
   const double dx = world.x - ref.x;
@@ -35,15 +36,15 @@ Point WorldToLocal(const Point &world, const Pose &ref) {
   return {dx * cos_yaw + dy * sin_yaw, -dx * sin_yaw + dy * cos_yaw};
 }
 
-Point LocalToWorld(const Point &local, const Pose &ref) {
+Point2d LocalToWorld(const Point2d &local, const Pose2d &ref) {
   const double cos_yaw = std::cos(ref.yaw);
   const double sin_yaw = std::sin(ref.yaw);
   return {ref.x + local.x * cos_yaw - local.y * sin_yaw,
           ref.y + local.x * sin_yaw + local.y * cos_yaw};
 }
 
-void WorldToLocal(const std::vector<Point> &world_pts, const Pose &ref,
-                  std::vector<Point> *local_pts) {
+void WorldToLocal(const std::vector<Point2d> &world_pts, const Pose2d &ref,
+                  std::vector<Point2d> *local_pts) {
   local_pts->clear();
   local_pts->reserve(world_pts.size());
 
@@ -52,45 +53,46 @@ void WorldToLocal(const std::vector<Point> &world_pts, const Pose &ref,
   for (const auto &w : world_pts) {
     const double dx = w.x - ref.x;
     const double dy = w.y - ref.y;
-    local_pts->push_back({dx * cos_yaw + dy * sin_yaw, -dx * sin_yaw + dy * cos_yaw});
+    local_pts->push_back(
+        {dx * cos_yaw + dy * sin_yaw, -dx * sin_yaw + dy * cos_yaw});
   }
 }
 
-void LocalToWorld(const std::vector<Point> &local_pts, const Pose &ref,
-                  std::vector<Point> *world_pts) {
+void LocalToWorld(const std::vector<Point2d> &local_pts, const Pose2d &ref,
+                  std::vector<Point2d> *world_pts) {
   world_pts->clear();
   world_pts->reserve(local_pts.size());
 
   const double cos_yaw = std::cos(ref.yaw);
   const double sin_yaw = std::sin(ref.yaw);
   for (const auto &l : local_pts) {
-    world_pts->push_back(
-        {ref.x + l.x * cos_yaw - l.y * sin_yaw, ref.y + l.x * sin_yaw + l.y * cos_yaw});
+    world_pts->push_back({ref.x + l.x * cos_yaw - l.y * sin_yaw,
+                          ref.y + l.x * sin_yaw + l.y * cos_yaw});
   }
 }
 
 /* =========================
- * Pose transform
+ * Pose2d transform
  * ========================= */
 
-Pose WorldToLocal(const Pose &world, const Pose &ref) {
+Pose2d WorldToLocal(const Pose2d &world, const Pose2d &ref) {
   const double cos_yaw = std::cos(ref.yaw);
   const double sin_yaw = std::sin(ref.yaw);
   const double dx = world.x - ref.x;
   const double dy = world.y - ref.y;
 
-  Pose out;
+  Pose2d out;
   out.x = dx * cos_yaw + dy * sin_yaw;
   out.y = -dx * sin_yaw + dy * cos_yaw;
   out.yaw = NormalizeAngle(world.yaw - ref.yaw); // 默认 [0, 2pi)
   return out;
 }
 
-Pose LocalToWorld(const Pose &local, const Pose &ref) {
+Pose2d LocalToWorld(const Pose2d &local, const Pose2d &ref) {
   const double cos_yaw = std::cos(ref.yaw);
   const double sin_yaw = std::sin(ref.yaw);
 
-  Pose out;
+  Pose2d out;
   out.x = ref.x + local.x * cos_yaw - local.y * sin_yaw;
   out.y = ref.y + local.x * sin_yaw + local.y * cos_yaw;
   out.yaw = NormalizeAngle(local.yaw + ref.yaw);

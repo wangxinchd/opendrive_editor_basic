@@ -2,22 +2,17 @@
 
 #include <cmath>
 #include <vector>
+
+#include "point.hpp"
+
 namespace common::geometry {
+
+using Point2d = common::Point2d;
+using Pose2d = common::Pose2d;
 
 /* =========================
  * Basic types
  * ========================= */
-
-struct Point {
-  double x = 0.0;
-  double y = 0.0;
-};
-
-struct Pose {
-  double x = 0.0;
-  double y = 0.0;
-  double yaw = 0.0; // rad
-};
 
 /**
  * @brief Normalize angle into [lower, upper)
@@ -29,24 +24,25 @@ struct Pose {
  * @param lower  Lower bound (inclusive)
  * @param upper  Upper bound (exclusive), must satisfy upper - lower = 2π
  */
-double NormalizeAngle(double angle, double lower = 0, double upper = 2.0 * M_PI);
+double NormalizeAngle(double angle, double lower = 0,
+                      double upper = 2.0 * M_PI);
 
 /* =========================
  * Coordinate transform
  * ========================= */
 
-// Point
-Point WorldToLocal(const Point &world, const Pose &ref);
-Point LocalToWorld(const Point &local, const Pose &ref);
+// Point2d
+Point2d WorldToLocal(const Point2d &world, const Pose2d &ref);
+Point2d LocalToWorld(const Point2d &local, const Pose2d &ref);
 
-void WorldToLocal(const std::vector<Point> &world_pts, const Pose &ref,
-                  std::vector<Point> *local_pts);
+void WorldToLocal(const std::vector<Point2d> &world_pts, const Pose2d &ref,
+                  std::vector<Point2d> *local_pts);
 
-void LocalToWorld(const std::vector<Point> &local_pts, const Pose &ref,
-                  std::vector<Point> *world_pts);
+void LocalToWorld(const std::vector<Point2d> &local_pts, const Pose2d &ref,
+                  std::vector<Point2d> *world_pts);
 
-// Pose
-Pose WorldToLocal(const Pose &world, const Pose &ref);
-Pose LocalToWorld(const Pose &local, const Pose &ref);
+// Pose2d
+Pose2d WorldToLocal(const Pose2d &world, const Pose2d &ref);
+Pose2d LocalToWorld(const Pose2d &local, const Pose2d &ref);
 
 } // namespace common::geometry
