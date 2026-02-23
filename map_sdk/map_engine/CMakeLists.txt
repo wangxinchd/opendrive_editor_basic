@@ -8,15 +8,15 @@ set(SOURCES
     src/sumo_parser.cc
 )
 
-
-message("wangxin0000  ${CMAKE_SOURCE_DIR}/map_sdk/map_base")
 add_library(${PROJECT_NAME}_lib STATIC ${SOURCES})
-
-
 
 target_include_directories(${PROJECT_NAME}_lib
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/third_party/pugixml
+        ${CMAKE_SOURCE_DIR}/CommonMini
+)
+target_link_libraries(${PROJECT_NAME}_lib PRIVATE road_manager_lib
 )
 

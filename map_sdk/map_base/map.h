@@ -1,9 +1,9 @@
 #ifndef MAP_BASE_MAP_HPP
 #define MAP_BASE_MAP_HPP
 
-#include "intersection.hpp"
-#include "lane.hpp"
-#include "road.hpp"
+#include "intersection.h"
+#include "lane.h"
+#include "road.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -12,6 +12,7 @@ namespace map_base {
 
 class Map {
 
+public:
   struct Metadata {
     double center_x = 0.0;
     double center_y = 0.0;
@@ -27,6 +28,24 @@ class Map {
     double max_y = 0.0;
     double min_z = 0.0;
     double max_z = 0.0;
+
+    // init metadata
+    Metadata() {
+      center_x = 0.0;
+      center_y = 0.0;
+      center_z = 0.0;
+      x_bias = 0.0;
+      y_bias = 0.0;
+      z_bias = 0.0;
+
+      // 最大浮点数
+      min_x = std::numeric_limits<double>::max();
+      max_x = std::numeric_limits<double>::min();
+      min_y = std::numeric_limits<double>::max();
+      max_y = std::numeric_limits<double>::min();
+      min_z = std::numeric_limits<double>::max();
+      max_z = std::numeric_limits<double>::min();
+    }
   };
 
 public:
@@ -51,6 +70,12 @@ public:
 
   const std::vector<std::shared_ptr<Lane>> &lanes() const { return lanes_; }
   void addLane(const std::shared_ptr<Lane> &lane) { lanes_.push_back(lane); }
+
+  void clear() {
+    roads_.clear();
+    intersections_.clear();
+    lanes_.clear();
+  }
 
 private:
   std::string name_;

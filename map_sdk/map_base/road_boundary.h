@@ -1,14 +1,14 @@
 #ifndef MAP_BASE_ROAD_BOUNDARY_HPP
 #define MAP_BASE_ROAD_BOUNDARY_HPP
 
-#include "common/point.hpp"
-
-using Point2d = common::Point2d;
+#include "common/point.h"
 
 namespace map_base {
 
 class RoadBoundary {
 public:
+  using Pose2d = common::Pose2d;
+
   struct RoadBoundaryId {
     std::int64_t road_id;
     std::int64_t road_boundary_id;
@@ -29,10 +29,10 @@ public:
   const RoadBoundaryId &id() const { return id_; }
   void setId(const RoadBoundaryId &id) { id_ = id; }
 
-  const std::vector<Point2d> &points() const { return points_; }
-  void setPoints(const std::vector<Point2d> &points) { points_ = points; }
-  void addPoint(const Point2d &point) { points_.push_back(point); }
-  void clearPoints() { points_.clear(); }
+  const std::vector<Pose2d> &poses() const { return poses_; }
+  void setPoses(const std::vector<Pose2d> &poses) { poses_ = poses; }
+  void addPose(const Pose2d &pose) { poses_.push_back(pose); }
+  void clearPoses() { poses_.clear(); }
 
   // 前驱roadboundarys
   const std::vector<std::shared_ptr<RoadBoundary>>
@@ -58,7 +58,7 @@ public:
   void clearSuccessorRoadBoundaries() { successor_road_boundaries_.clear(); }
 
 private:
-  std::vector<Point2d> points_;
+  std::vector<Pose2d> poses_;
   RoadBoundaryId id_;
   std::vector<std::shared_ptr<RoadBoundary>> predecessor_road_boundaries_;
   std::vector<std::shared_ptr<RoadBoundary>> successor_road_boundaries_;

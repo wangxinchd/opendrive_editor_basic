@@ -11,17 +11,22 @@ CONFIG += c++11
 SOURCES += \
     form_edit/edit_road/form_edit_road.cpp \
     main.cpp \
-    display.cpp
+    display.cpp \
+    display_config/display_config.cc \
+    display_config/display_config_dialog.cc
 
 HEADERS += \
     display.h \
     form_edit/edit_road/form_edit_road.h \
-    form_edit_road.h
+    form_edit_road.h \
+    display_config/display_config.h \
+    display_config/display_config_dialog.h
 
 FORMS += \
     display.ui \
     form_edit/edit_road/form_edit_road.ui \
-    form_edit_road.ui
+    form_edit_road.ui \
+    display_config/display_config_dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

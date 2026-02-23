@@ -3,7 +3,7 @@
 #include <cmath>
 #include <vector>
 
-#include "point.hpp"
+#include "point.h"
 
 namespace common::geometry {
 

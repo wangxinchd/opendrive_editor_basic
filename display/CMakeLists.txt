@@ -16,8 +16,25 @@ add_executable(${PROJECT_NAME} display.cpp
                                main.cpp
                                display.ui
 
+                               # draw
+                               QPainter_wrapper.cc
+                               draw_map.cc
+                               display_common.cc
+
+                               # display config
+                               display_config/display_config.cc
+                               display_config/display_config_dialog.cc
+                               display_config/display_config_dialog.ui
+
+                               uviz_keybroad.cc
+                               uviz_mouse.cc
+
                                form_edit/edit_road/form_edit_road.ui
                                form_edit/edit_road/form_edit_road.cpp
                                )
 
-target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR})
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets
+                                              map_engine_lib
+                                              common_lib
+)

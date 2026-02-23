@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenDRIVE>
+    <header revMajor="1" revMinor="6" name="S_Curve_Map"
+        version="1.00" date="2026-01-20"
+        north="500" south="0" east="500" west="0">
+        <geoReference>
+            <![CDATA[+proj=utm +lat_0=37.35429341239328 +lon_0=-122.0859797650754 +k_0=1 +x_0=-5 +y_0=1.75 +datum=WGS84 +geoidgrids=egm96_15.gtx +vunits=m +zone=32 +ellps=GRS80 +units=m +no_defs]]>
+        </geoReference>
+    </header>
+
+    <road name="S_Curve_Road" length="220" id="1" junction="-1">
+        <planView>
+            <geometry s="0.000" x="100.000" y="0.000" hdg="0.000000" length="220.031">
+                <paramPoly3
+                    aU="-0.000884060634945639"
+                    bU="1.00012097271818"
+                    cU="-3.85305670877097e-06"
+                    dU="1.16739483870916e-08"
+                    aV="-2.92917041012874e-05"
+                    bV="3.22974053971585e-06"
+                    cV="0.000229220622052846"
+                    dV="-6.9449009268336e-07"
+                    pRange="normalized">
+                </paramPoly3>
+            </geometry>
+        </planView>
+        <lanes>
+            <laneSection s="0">
+                <center>
+                    <lane id="0" type="none" />
+                </center>
+                <right>
+                    <lane id="-1" type="driving">
+                        <width sOffset="0" a="3.5" />
+                        <speed sOffset="0" max="16.667" />
+                    </lane>
+                </right>
+            </laneSection>
+        </lanes>
+    </road>
+
+    <road name="S_Curve_Road" length="270" id="2" junction="-1">
+        <planView>
+            <geometry s="0.0" x="400.000000" y="0.000000" hdg="0.000000000000e+00"
+                length="2.200373333546e+02">
+                <paramPoly3 aU="-8.840606586400e-04" bU="1.000120972719e+00"
+                    cU="-3.853056722001e-06" dU="1.167394842581e-08" aV="-2.929170385802e-05"
+                    bV="3.229740532974e-06" cV="2.292206220529e-04" dV="-6.944900926835e-07"
+                    pRange="arcLength" />
+            </geometry>
+        </planView>
+        <lanes>
+            <laneSection s="0">
+                <center>
+                    <lane id="0" type="none" />
+                </center>
+                <right>
+                    <lane id="-1" type="driving">
+                        <width sOffset="0" a="3.5" />
+                        <speed sOffset="0" max="16.667" />
+                    </lane>
+                </right>
+            </laneSection>
+        </lanes>
+    </road>
+</OpenDRIVE>

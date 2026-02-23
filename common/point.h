@@ -19,6 +19,9 @@ struct Pose2d {
   double x = 0.0;
   double y = 0.0;
   double yaw = 0.0; // rad
+
+  Pose2d() = default;
+  Pose2d(double x, double y, double yaw) : x(x), y(y), yaw(yaw) {}
 };
 
 struct Pose3d {

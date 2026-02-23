@@ -14,11 +14,10 @@ target_link_libraries(${PROJECT_NAME}_lib PRIVATE
     common_mini_lib
 )
 
-target_include_directories(${PROJECT_NAME}_lib
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/..
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../third_party/pugixml
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../CommonMini
+target_include_directories(${PROJECT_NAME}_lib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+                                                       ${CMAKE_CURRENT_SOURCE_DIR}/..
+                                                       ${CMAKE_SOURCE_DIR}/third_party/pugixml
+                                                       ${CMAKE_SOURCE_DIR}/CommonMini
 )
 
 

@@ -1,7 +1,7 @@
 #ifndef MAP_BASE_LANE_BOUNDARY_HPP
 #define MAP_BASE_LANE_BOUNDARY_HPP
 
-#include "common/point.hpp"
+#include "common/point.h"
 #include <memory>
 #include <vector>
 
@@ -9,11 +9,14 @@ namespace map_base {
 
 class LaneBoundary {
 public:
-  LaneBoundary() = default;
-  LaneBoundary(const std::vector<Point2d> &points) : points_(points) {}
+  using Pose2d = common::Pose2d;
 
-  const std::vector<Point2d> &points() const { return points_; }
-  void setPoints(const std::vector<Point2d> &points) { points_ = points; }
+  LaneBoundary() = default;
+
+  const std::vector<Pose2d> &poses() const { return poses_; }
+  void setPoses(const std::vector<Pose2d> &poses) { poses_ = poses; }
+  void addPose(const Pose2d &pose) { poses_.push_back(pose); }
+  void clearPoses() { poses_.clear(); }
 
   // 前驱laneboundarys
   const std::vector<std::shared_ptr<LaneBoundary>>
@@ -39,7 +42,7 @@ public:
   void clearSuccessorLaneBoundaries() { successor_lane_boundaries_.clear(); }
 
 private:
-  std::vector<Point2d> points_;
+  std::vector<Pose2d> poses_;
 
   // 前驱laneboundarys
   std::vector<std::shared_ptr<LaneBoundary>> predecessor_lane_boundaries_;
